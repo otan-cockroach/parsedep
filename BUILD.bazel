@@ -1,0 +1,21 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("@bazel_gazelle//:def.bzl", "gazelle")
+
+# gazelle:prefix github.com/cockroachdb/parsedep
+gazelle(name = "gazelle")
+
+go_library(
+    name = "parsedep_lib",
+    srcs = ["test.go"],
+    importpath = "github.com/cockroachdb/parsedep",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@com_github_cockroachdb_cockroach//pkg/sql/parser",  # keep
+    ],
+)
+
+go_binary(
+    name = "parsedep",
+    embed = [":parsedep_lib"],
+    visibility = ["//visibility:public"],
+)
