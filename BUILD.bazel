@@ -4,14 +4,15 @@ load("@bazel_gazelle//:def.bzl", "gazelle")
 # gazelle:prefix github.com/cockroachdb/parsedep
 gazelle(name = "gazelle")
 
-go_library(
-    name = "parsedep_lib",
-    srcs = ["test.go"],
-    importpath = "github.com/cockroachdb/parsedep",
-    visibility = ["//visibility:private"],
-    deps = [
-        "@com_github_cockroachdb_cockroach//pkg/sql/parser",  # keep
+gazelle(
+    name = "gazelle-update-repos",
+    args = [
+        "-from_file=go.mod",
+        "-to_macro=deps.bzl%go_dependencies",
+        "-prune",
+        "-build_file_proto_mode=disable_global",
     ],
+    command = "update-repos",
 )
 
 go_binary(
