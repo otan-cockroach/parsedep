@@ -20,3 +20,11 @@ go_binary(
     embed = [":parsedep_lib"],
     visibility = ["//visibility:public"],
 )
+
+go_library(
+    name = "parsedep_lib",
+    srcs = ["test.go"],
+    importpath = "github.com/cockroachdb/parsedep",
+    visibility = ["//visibility:private"],
+    deps = ["@com_github_cockroachdb_cockroach//pkg/sql/parser"],
+)

@@ -5,10 +5,12 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
     name = "io_bazel_rules_go",
-    sha256 = "8e968b5fcea1d2d64071872b12737bbb5514524ee5f0a4f54f5920266c261acb",
+    sha256 = "8a993815a6a7cfe47e46238383f0e36a80b9ce0ac482f855c7288a31565b5661",
+    strip_prefix = "cockroachdb-rules_go-58cb947",
     urls = [
-        "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.28.0/rules_go-v0.28.0.zip",
-        "https://github.com/bazelbuild/rules_go/releases/download/v0.28.0/rules_go-v0.28.0.zip",
+        # cockroachdb/rules_go as of 58cb94707783f529462d4c6d3c698933a1022942
+        # (upstream release-0.29 plus a few patches).
+        "https://storage.googleapis.com/public-bazel-artifacts/bazel/cockroachdb-rules_go-v0.27.0-56-g58cb947.tar.gz",
     ],
 )
 
@@ -30,7 +32,7 @@ go_dependencies()
 
 go_rules_dependencies()
 
-go_register_toolchains(version = "1.16.5")
+go_register_toolchains(version = "1.17.6")
 
 gazelle_dependencies()
 
